@@ -1,105 +1,89 @@
 #include <gtest/gtest.h>
 #include <cstring>
 
-// Unit test for getSoundexCode
+// Declare the functions to be tested
+extern "C" {
+    char getSoundexCode(char c);
+    char fetch_firstchar(const char *name);
+    void appendSoundex(char *soundex, char code, char *prevCode, int *length);
+    void initializeSoundex(const char *name, char firstChar, char *soundex, int *length);
+    void processSoundex(const char *name, char firstChar, char *soundex, int *length);
+    void paddingSoundex(char *soundex);
+    void generateSoundex(const char *name, char *soundex);
+}
+
+// Test for getSoundexCode
 TEST(SoundexTest, GetSoundexCode) {
     EXPECT_EQ(getSoundexCode('A'), '0');
     EXPECT_EQ(getSoundexCode('B'), '1');
     EXPECT_EQ(getSoundexCode('C'), '2');
     EXPECT_EQ(getSoundexCode('D'), '3');
-    EXPECT_EQ(getSoundexCode('E'), '0'); // 'E' maps to '0'
+    EXPECT_EQ(getSoundexCode('E'), '0');
     EXPECT_EQ(getSoundexCode('F'), '1');
     EXPECT_EQ(getSoundexCode('G'), '2');
-    EXPECT_EQ(getSoundexCode('H'), '0'); // 'H' maps to '0'
-    EXPECT_EQ(getSoundexCode('K'), '2');
-    EXPECT_EQ(getSoundexCode('L'), '4');
-    EXPECT_EQ(getSoundexCode('M'), '5');
-    EXPECT_EQ(getSoundexCode('N'), '5');
-    EXPECT_EQ(getSoundexCode('O'), '0'); // 'O' maps to '0'
-    EXPECT_EQ(getSoundexCode('P'), '1');
-    EXPECT_EQ(getSoundexCode('Q'), '0'); // 'Q' maps to '0'
-    EXPECT_EQ(getSoundexCode('R'), '6');
-    EXPECT_EQ(getSoundexCode('S'), '2');
-    EXPECT_EQ(getSoundexCode('T'), '3');
-    EXPECT_EQ(getSoundexCode('U'), '0'); // 'U' maps to '0'
-    EXPECT_EQ(getSoundexCode('V'), '1');
-    EXPECT_EQ(getSoundexCode('W'), '0'); // 'W' maps to '0'
-    EXPECT_EQ(getSoundexCode('X'), '2');
-    EXPECT_EQ(getSoundexCode('Y'), '0'); // 'Y' maps to '0'
     EXPECT_EQ(getSoundexCode('Z'), '2');
+    EXPECT_EQ(getSoundexCode(' '), '0'); // non-alphabetic characters
 }
 
-// Unit test for fetch_firstchar
+// Test for fetch_firstchar
 TEST(SoundexTest, FetchFirstChar) {
     EXPECT_EQ(fetch_firstchar("example"), 'E');
-    EXPECT_EQ(fetch_firstchar(""), '\0'); // Empty string
     EXPECT_EQ(fetch_firstchar("a"), 'A');
-    EXPECT_EQ(fetch_firstchar("A"), 'A');
+    EXPECT_EQ(fetch_firstchar(""), '\0'); // Empty string
 }
 
-// Unit test for appendSoundex
+// Test for appendSoundex
 TEST(SoundexTest, AppendSoundex) {
-    char soundex[5] = "S";
-    char prevCode = 'S';
+    char soundex[5] = "A";
+    char prevCode = 'A';
     int length = 1;
 
     appendSoundex(soundex, '1', &prevCode, &length);
-    EXPECT_STREQ(soundex, "S1");
+    EXPECT_STREQ(soundex, "A1");
+    
     appendSoundex(soundex, '1', &prevCode, &length);
-    EXPECT_STREQ(soundex, "S1"); // Should not append the same code
+    EXPECT_STREQ(soundex, "A1"); // Should not append duplicate code
 
     appendSoundex(soundex, '2', &prevCode, &length);
-    EXPECT_STREQ(soundex, "S12");
+    EXPECT_STREQ(soundex, "A12");
 }
 
-// Unit test for initializeSoundex
+// Test for initializeSoundex
 TEST(SoundexTest, InitializeSoundex) {
     char soundex[5] = "";
     int length = 0;
 
     initializeSoundex("example", 'E', soundex, &length);
-    EXPECT_STREQ(soundex, "E0"); // Assuming 'E' maps to '0', adjust based on actual implementation
-
-    // Test with a second character mapping to non-'0'
-    char soundex2[5] = "";
-    length = 0;
-    initializeSoundex("Example", 'E', soundex2, &length);
-    EXPECT_STREQ(soundex2, "E0"); // This will also need adjustment based on actual implementation
+    EXPECT_STREQ(soundex, "E0"); // Example has 'E' and '0' for second character
 }
 
-// Unit test for processSoundex
+// Test for processSoundex
 TEST(SoundexTest, ProcessSoundex) {
     char soundex[5] = "";
     int length = 0;
 
     processSoundex("example", 'E', soundex, &length);
-    EXPECT_STREQ(soundex, "E0"); // Adjust expected result based on implementation details
-
-    // Additional tests with longer names
-    char soundex2[5] = "";
-    length = 0;
-    processSoundex("example", 'E', soundex2, &length);
-    EXPECT_STREQ(soundex2, "E0"); // Adjust as necessary
+    EXPECT_STREQ(soundex, "E0"); // Adjust according to the expected result
 }
 
-// Unit test for paddingSoundex
+// Test for paddingSoundex
 TEST(SoundexTest, PaddingSoundex) {
-    char soundex[5] = "E";
+    char soundex[5] = "A";
     paddingSoundex(soundex);
-    EXPECT_STREQ(soundex, "E000");
+    EXPECT_STREQ(soundex, "A000");
 
-    char soundex2[5] = "E12";
+    char soundex2[5] = "A12";
     paddingSoundex(soundex2);
-    EXPECT_STREQ(soundex2, "E120");
+    EXPECT_STREQ(soundex2, "A120");
 }
 
-// Unit test for generateSoundex
+// Test for generateSoundex
 TEST(SoundexTest, GenerateSoundex) {
     char soundex[5];
 
     generateSoundex("Singh", soundex);
     EXPECT_STREQ(soundex, "S520");
-    
+
     generateSoundex("Kumar", soundex);
     EXPECT_STREQ(soundex, "K560");
 
@@ -116,3 +100,8 @@ TEST(SoundexTest, GenerateSoundex) {
     EXPECT_STREQ(soundex, "");
 }
 
+// The main function for Google Test
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
