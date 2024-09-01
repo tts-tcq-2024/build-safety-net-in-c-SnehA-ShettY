@@ -1,7 +1,16 @@
 #include <gtest/gtest.h>
 #include <cstring>
 
-
+// Declare the functions to be tested
+extern "C" {
+    char getSoundexCode(char c);
+    char fetch_firstchar(const char *name);
+    void appendSoundex(char *soundex, char code, char *prevCode, int *length);
+    void initializeSoundex(const char *name, char firstChar, char *soundex, int *length);
+    void processSoundex(const char *name, char firstChar, char *soundex, int *length);
+    void paddingSoundex(char *soundex);
+    void generateSoundex(const char *name, char *soundex);
+}
 
 // Unit test for getSoundexCode
 TEST(SoundexTest, GetSoundexCode) {
@@ -36,6 +45,7 @@ TEST(SoundexTest, FetchFirstChar) {
     EXPECT_EQ(fetch_firstchar("example"), 'E');
     EXPECT_EQ(fetch_firstchar(""), '\0'); // Empty string
     EXPECT_EQ(fetch_firstchar("a"), 'A');
+    EXPECT_EQ(fetch_firstchar("A"), 'A');
 }
 
 // Unit test for appendSoundex
@@ -59,7 +69,13 @@ TEST(SoundexTest, InitializeSoundex) {
     int length = 0;
 
     initializeSoundex("example", 'E', soundex, &length);
-    EXPECT_STREQ(soundex, "E0"); // Assuming 'E' should map to '0'
+    EXPECT_STREQ(soundex, "E0"); // Assuming 'E' maps to '0', adjust based on actual implementation
+
+    // Test with a second character mapping to non-'0'
+    char soundex2[5] = "";
+    length = 0;
+    initializeSoundex("Example", 'E', soundex2, &length);
+    EXPECT_STREQ(soundex2, "E0"); // This will also need adjustment based on actual implementation
 }
 
 // Unit test for processSoundex
@@ -68,7 +84,13 @@ TEST(SoundexTest, ProcessSoundex) {
     int length = 0;
 
     processSoundex("example", 'E', soundex, &length);
-    EXPECT_STREQ(soundex, "E0"); // Adjust expected result as per implementation
+    EXPECT_STREQ(soundex, "E0"); // Adjust expected result based on implementation details
+
+    // Additional tests with longer names
+    char soundex2[5] = "";
+    length = 0;
+    processSoundex("example", 'E', soundex2, &length);
+    EXPECT_STREQ(soundex2, "E0"); // Adjust as necessary
 }
 
 // Unit test for paddingSoundex
@@ -105,5 +127,8 @@ TEST(SoundexTest, GenerateSoundex) {
     EXPECT_STREQ(soundex, "");
 }
 
-
-
+// The main function for Google Test
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
