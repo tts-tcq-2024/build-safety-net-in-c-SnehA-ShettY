@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <cstring>
 #include "Soundex.h"
 
 // Test for getSoundexCode (MCDC: Condition testing for character range)
