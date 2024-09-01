@@ -6,11 +6,15 @@
 
 char getSoundexCode(char c) {
     c = toupper(c);
-    const char *groups = "BFPVCGJKQSXZDTLMNR";
-    const char *codes  = "111122222222334556";
-    
-    const char *pos = strchr(groups, c);
-    return pos ? codes[pos - groups] : '0';
+    switch (c) {
+        case 'B': case 'F': case 'P': case 'V': return '1';
+        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
+        case 'D': case 'T': return '3';
+        case 'L': return '4';
+        case 'M': case 'N': return '5';
+        case 'R': return '6';
+        default: return '0'; // For A, E, I, O, U, H, W, Y
+    }
 }
 
 void generateSoundex(const char *name, char *soundex) {
@@ -21,11 +25,13 @@ void generateSoundex(const char *name, char *soundex) {
 
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
+    char prevCode = '0';
 
     for (int i = 1; name[i] != '\0' && sIndex < 4; ++i) {
         char code = getSoundexCode(name[i]);
-        if (code != '0' && code != soundex[sIndex - 1]) {
+        if (code != '0' && code != prevCode) {
             soundex[sIndex++] = code;
+            prevCode = code;
         }
     }
 
