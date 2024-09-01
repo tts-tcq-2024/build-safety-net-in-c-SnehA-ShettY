@@ -1,17 +1,6 @@
 #include <gtest/gtest.h>
 #include <cstring>
 
-// Declare the functions to be tested
-extern "C" {
-    char getSoundexCode(char c);
-    char fetch_firstchar(const char *name);
-    void appendSoundex(char *soundex, char code, char *prevCode, int *length);
-    void initializeSoundex(const char *name, char firstChar, char *soundex, int *length);
-    void processSoundex(const char *name, char firstChar, char *soundex, int *length);
-    void paddingSoundex(char *soundex);
-    void generateSoundex(const char *name, char *soundex);
-}
-
 // Unit test for getSoundexCode
 TEST(SoundexTest, GetSoundexCode) {
     EXPECT_EQ(getSoundexCode('A'), '0');
@@ -127,8 +116,3 @@ TEST(SoundexTest, GenerateSoundex) {
     EXPECT_STREQ(soundex, "");
 }
 
-// The main function for Google Test
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
