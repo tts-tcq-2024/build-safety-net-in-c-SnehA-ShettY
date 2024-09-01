@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <cstring>
+#include "Soundex.h"
 
 // Declare the functions to be tested
 extern "C" {
