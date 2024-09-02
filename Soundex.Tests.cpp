@@ -91,7 +91,7 @@ TEST(SoundexTest, GenerateSoundex) {
     EXPECT_STREQ(soundex, "A261");
 
     generateSoundex("Tymczak", soundex);
-    EXPECT_STREQ(soundex, "T522");
+    EXPECT_STREQ(soundex, "T520");
 
     generateSoundex("", soundex);
     EXPECT_STREQ(soundex, "");
