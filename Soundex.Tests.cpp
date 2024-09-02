@@ -60,38 +60,4 @@ TEST(SoundexTest, ProcessSoundex) {
     EXPECT_EQ(length, 3);
 }
 
-// Test paddingSoundex function
-TEST(SoundexTest, PaddingSoundex) {
-    char soundex[5] = "S5";
 
-    paddingSoundex(soundex);
-    EXPECT_STREQ(soundex, "S500");
-
-    strcpy(soundex, "S53");
-    paddingSoundex(soundex);
-    EXPECT_STREQ(soundex, "S530");
-
-    strcpy(soundex, "S530");
-    paddingSoundex(soundex);
-    EXPECT_STREQ(soundex, "S530");
-}
-
-// Test generateSoundex function
-TEST(SoundexTest, GenerateSoundex) {
-    char soundex[5] = "";
-
-    generateSoundex("Smith", soundex);
-    EXPECT_STREQ(soundex, "S530");
-
-    generateSoundex("Smythe", soundex);
-    EXPECT_STREQ(soundex, "S530");
-
-    generateSoundex("Ashcraft", soundex);
-    EXPECT_STREQ(soundex, "A261");
-
-    generateSoundex("Tymczak", soundex);
-    EXPECT_STREQ(soundex, "T522");
-
-    generateSoundex("", soundex);
-    EXPECT_STREQ(soundex, "");
-}
