@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h> 
+#include <string.h>  
 
 char getSoundexCode(char c) {  
     static const char soundexCodes[] = {
