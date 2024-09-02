@@ -77,3 +77,27 @@ TEST(SoundexTest, PaddingSoundex) {
     EXPECT_STREQ(soundex, "S530");
 }
 
+// Test generateSoundex function
+TEST(SoundexTest, GenerateSoundex) {
+    char soundex[5] = "";
+
+    generateSoundex("Smith", soundex);
+    EXPECT_STREQ(soundex, "S530");
+
+    generateSoundex("Smythe", soundex);
+    EXPECT_STREQ(soundex, "S530");
+
+    generateSoundex("Ashcraft", soundex);
+    EXPECT_STREQ(soundex, "A261");
+
+    generateSoundex("Tymczak", soundex);
+    EXPECT_STREQ(soundex, "T522");
+
+    generateSoundex("", soundex);
+    EXPECT_STREQ(soundex, "");
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
