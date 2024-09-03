@@ -33,7 +33,7 @@ void append_Soundex(char *soundex, char code, char *prevCode, int *length) {
  
 void initialize_Soundex(const char *name, char firstChar, char *soundex, int *length) {
     soundex[(*length)++] = firstChar;
-    char secondex = getSoundexCode(name[1]);
+    char secondex = get_Soundex_Code(name[1]);
     if (secondex != '0') {
         soundex[(*length)++] = secondex;
     }
@@ -61,7 +61,7 @@ void generate_Soundex(const char *name, char *soundex) {
         return;
     }
  
-    char firstChar = fetch_firstchar(name);
+    char firstChar = fetch_first_char(name);
     int length = 0;
     process_Soundex(name, firstChar, soundex, &length);
     soundex[length] = '\0'; // Null-terminate the soundex string
