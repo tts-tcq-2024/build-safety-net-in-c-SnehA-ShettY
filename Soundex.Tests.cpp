@@ -3,19 +3,45 @@
 #include "Soundex.h"
 
 // Test get_Soundex_Code function
-TEST(SoundexTest, GetSoundexCode) {
-    EXPECT_EQ(get_Soundex_Code('A'), '0');
-    EXPECT_EQ(get_Soundex_Code('B'), '1');
-    EXPECT_EQ(get_Soundex_Code('C'), '2');
-    EXPECT_EQ(get_Soundex_Code('D'), '3');
-    EXPECT_EQ(get_Soundex_Code('E'), '0');
-    EXPECT_EQ(get_Soundex_Code('F'), '1');
-    EXPECT_EQ(get_Soundex_Code('G'), '2');
-    EXPECT_EQ(get_Soundex_Code('H'), '0');
-    EXPECT_EQ(get_Soundex_Code('Z'), '2');
-    EXPECT_EQ(get_Soundex_Code('L'), '4');
-    EXPECT_EQ(get_Soundex_Code('M'), '5');
-    EXPECT_EQ(get_Soundex_Code('R'), '6');
+TEST(SoundexTest, get_Soundex_Code) {
+    EXPECT_EQ('1', get_Soundex_Code('B'));
+    EXPECT_EQ('1', get_Soundex_Code('F'));
+    EXPECT_EQ('1', get_Soundex_Code('P'));
+    EXPECT_EQ('1', get_Soundex_Code('V'));
+
+    EXPECT_EQ('2', get_Soundex_Code('C'));
+    EXPECT_EQ('2', get_Soundex_Code('G'));
+    EXPECT_EQ('2', get_Soundex_Code('J'));
+    EXPECT_EQ('2', get_Soundex_Code('K'));
+    EXPECT_EQ('2', get_Soundex_Code('Q'));
+    EXPECT_EQ('2', get_Soundex_Code('S'));
+    EXPECT_EQ('2', get_Soundex_Code('X'));
+    EXPECT_EQ('2', get_Soundex_Code('Z'));
+
+    EXPECT_EQ('3', get_Soundex_Code('D'));
+    EXPECT_EQ('3', get_Soundex_Code('T'));
+
+    EXPECT_EQ('4', get_Soundex_Code('L'));
+
+    EXPECT_EQ('5', get_Soundex_Code('M'));
+    EXPECT_EQ('5', get_Soundex_Code('N'));
+
+    EXPECT_EQ('6', get_Soundex_Code('R'));
+
+    EXPECT_EQ('0', get_Soundex_Code('A'));
+    EXPECT_EQ('0', get_Soundex_Code('E'));
+    EXPECT_EQ('0', get_Soundex_Code('I'));
+    EXPECT_EQ('0', get_Soundex_Code('O'));
+    EXPECT_EQ('0', get_Soundex_Code('U'));
+
+    EXPECT_EQ('0', get_Soundex_Code('H'));
+    EXPECT_EQ('0', get_Soundex_Code('W'));
+    EXPECT_EQ('0', get_Soundex_Code('Y'));
+
+    EXPECT_EQ(get_Soundex_Code('b'), get_Soundex_Code('B'));
+    EXPECT_EQ(get_Soundex_Code('c'), get_Soundex_Code('C'));
+    EXPECT_EQ(get_Soundex_Code('d'), get_Soundex_Code('D'));
+    EXPECT_EQ(get_Soundex_Code('r'), get_Soundex_Code('R'));
 }
 
 // Test fetch_first_char function
