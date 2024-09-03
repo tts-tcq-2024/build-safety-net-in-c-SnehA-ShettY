@@ -19,19 +19,19 @@ char getSoundexCode(char c) {
     return '0';
 }
  
-char fetch_firstchar(const char *name) {
+char fetch_first_char(const char *name) {
     if (name[0] == '\0') return '\0';
     return toupper(name[0]);
 }
  
-void appendSoundex(char *soundex, char code, char *prevCode, int *length) {
+void append_Soundex(char *soundex, char code, char *prevCode, int *length) {
     if (code != '0' && code != *prevCode) {
         soundex[(*length)++] = code;
         *prevCode = code;
     }
 }
  
-void initializeSoundex(const char *name, char firstChar, char *soundex, int *length) {
+void initialize_Soundex(const char *name, char firstChar, char *soundex, int *length) {
     soundex[(*length)++] = firstChar;
     char secondex = getSoundexCode(name[1]);
     if (secondex != '0') {
@@ -39,7 +39,7 @@ void initializeSoundex(const char *name, char firstChar, char *soundex, int *len
     }
 }
  
-void processSoundex(const char *name, char firstChar, char *soundex, int *length) {
+void process_Soundex(const char *name, char firstChar, char *soundex, int *length) {
     int i;
     initializeSoundex(name, firstChar, soundex, length);
     char prevCode = soundex[1];
@@ -49,13 +49,13 @@ void processSoundex(const char *name, char firstChar, char *soundex, int *length
     }
 }
  
-void paddingSoundex(char *soundex) {
+void padding_Soundex(char *soundex) {
     while (strlen(soundex) < 4) {
         strcat(soundex, "0");
     }
 }
  
-void generateSoundex(const char *name, char *soundex) {
+void generate_Soundex(const char *name, char *soundex) {
     if (name[0] == '\0') {
         soundex[0] = '\0';
         return;
@@ -63,8 +63,8 @@ void generateSoundex(const char *name, char *soundex) {
  
     char firstChar = fetch_firstchar(name);
     int length = 0;
-    processSoundex(name, firstChar, soundex, &length);
+    process_Soundex(name, firstChar, soundex, &length);
     soundex[length] = '\0'; // Null-terminate the soundex string
-    paddingSoundex(soundex);
+    padding_Soundex(soundex);
 }
 #endif
