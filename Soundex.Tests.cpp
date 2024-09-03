@@ -13,6 +13,9 @@ TEST(SoundexTest, GetSoundexCode) {
     EXPECT_EQ(get_Soundex_Code('G'), '2');
     EXPECT_EQ(get_Soundex_Code('H'), '0');
     EXPECT_EQ(get_Soundex_Code('Z'), '2');
+    EXPECT_EQ(get_Soundex_Code('L'), '4');
+    EXPECT_EQ(get_Soundex_Code('M'), '5');
+    EXPECT_EQ(get_Soundex_Code('R'), '6');
 }
 
 // Test fetch_first_char function
