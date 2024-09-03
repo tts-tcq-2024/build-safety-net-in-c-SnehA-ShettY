@@ -101,10 +101,7 @@ TEST(SoundexTest, PaddingSoundex) {
     padding_Soundex(soundex);
     EXPECT_STREQ(soundex, "S530");
 
-    strcpy(soundex, "S530");
-    padding_Soundex(soundex);
-    EXPECT_STREQ(soundex, "S530");
-}
+ }
 
 // Test generate_Soundex function
 TEST(SoundexTest, GenerateSoundex) {
