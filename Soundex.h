@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include <string.h>  
  
-char getSoundexCode(char c) {  
+char get_Soundex_Code(char c) {  
     static const char soundexCodes[] = {
         '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
     };
@@ -41,11 +41,11 @@ void initialize_Soundex(const char *name, char firstChar, char *soundex, int *le
  
 void process_Soundex(const char *name, char firstChar, char *soundex, int *length) {
     int i;
-    initializeSoundex(name, firstChar, soundex, length);
+    initialize_Soundex(name, firstChar, soundex, length);
     char prevCode = soundex[1];
     for (i = 2; name[i] != '\0' && *length < 4; ++i) {
-        char code = getSoundexCode(name[i]);
-        appendSoundex(soundex, code, &prevCode, length);
+        char code = get_Soundex_Code(name[i]);
+        append_Soundex(soundex, code, &prevCode, length);
     }
 }
  
