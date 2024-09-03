@@ -2,7 +2,7 @@
 #include <cstring>
 #include "Soundex.h"
 
-// Test getSoundexCode function
+// Test get_Soundex_Code function
 TEST(SoundexTest, GetSoundexCode) {
     EXPECT_EQ(get_Soundex_Code('A'), '0');
     EXPECT_EQ(get_Soundex_Code('B'), '1');
@@ -15,14 +15,14 @@ TEST(SoundexTest, GetSoundexCode) {
     EXPECT_EQ(get_Soundex_Code('Z'), '2');
 }
 
-// Test fetch_firstchar function
+// Test fetch_first_char function
 TEST(SoundexTest, FetchFirstChar) {
     EXPECT_EQ(fetch_first_char("Example"), 'E');
     EXPECT_EQ(fetch_first_char("soundex"), 'S');
     EXPECT_EQ(fetch_first_char(""), '\0');
 }
 
-// Test appendSoundex function
+// Test append_Soundex function
 TEST(SoundexTest, AppendSoundex) {
     char soundex[5] = "A";
     char prevCode = '1';
@@ -41,7 +41,7 @@ TEST(SoundexTest, AppendSoundex) {
     EXPECT_EQ(length, 3);
 }
 
-// Test initializeSoundex function
+// Test initialize_Soundex function
 TEST(SoundexTest, InitializeSoundex) {
     char soundex[5] = "";
     int length = 0;
@@ -51,7 +51,7 @@ TEST(SoundexTest, InitializeSoundex) {
     EXPECT_EQ(length, 2);
 }
 
-// Test processSoundex function
+// Test process_Soundex function
 TEST(SoundexTest, ProcessSoundex) {
     char soundex[5] = "";
     int length = 0;
@@ -61,7 +61,7 @@ TEST(SoundexTest, ProcessSoundex) {
     EXPECT_EQ(length, 3);
 }
 
-// Test paddingSoundex function
+// Test padding_Soundex function
 TEST(SoundexTest, PaddingSoundex) {
     char soundex[5] = "S5";
 
@@ -77,7 +77,7 @@ TEST(SoundexTest, PaddingSoundex) {
     EXPECT_STREQ(soundex, "S530");
 }
 
-// Test generateSoundex function
+// Test generate_Soundex function
 TEST(SoundexTest, GenerateSoundex) {
     char soundex[5] = "";
 
