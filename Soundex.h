@@ -67,4 +67,4 @@ void generate_Soundex(const char *name, char *soundex) {
     soundex[length] = '\0'; // Null-terminate the soundex string
     padding_Soundex(soundex);
 }
-
+#endif // SOUNDEX_H
