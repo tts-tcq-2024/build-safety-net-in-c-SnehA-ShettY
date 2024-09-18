@@ -1,0 +1,98 @@
+                      Soundex Algorithm Test Specification 
+
+Feature: Soundex Algorithm for Improved Search Capability
+Background:
+Given the need for effective search functionality in applications, the Soundex algorithm encodes words into a letter plus three digits, mapping similarly sounding words to the same encoding. This helps in finding matches even if the user misspells words.
+
+
+Scenario 1: Encoding a word with the Soundex algorithm
+Given:
+•	A word to be encoded using the Soundex algorithm.
+When:
+•	The Soundex algorithm is applied to the word.
+Then:
+•	The word is encoded into a letter plus three digits according to the Soundex rules.
+
+Examples:
+  word	      soundex_code
+Ashcraft        A261
+Bach           	B200
+Pfister        	P123
+Honeyman    	H500
+
+    
+Scenario 2: Dropping occurrences of a, e, i, o, u, y, h, w
+Given:
+•	A word "<word>" containing the letters a, e, i, o, u, y, h, w.
+When:
+•	The Soundex algorithm is applied to the word.
+Then:
+•	The resulting Soundex code should not contain any occurrences of a, e, i, o, u, y, h, w after the first letter.
+  
+Examples:
+word	      soundex_code
+Aeiouyhw    	A000
+Hello        	H400
+Soundex	      	S532
+Algorithm      A426
+
+  
+Scenario 3: Replacing consonants with digits after the first letter
+Given:
+•	A word "<word>" containing consonants that need to be replaced with digits according to the Soundex rules.
+When:
+•	The Soundex algorithm is applied to the word.
+Then:
+•	The resulting Soundex code should replace the consonants with the correct digits after the first letter.
+  
+Examples:
+word	      soundex_code
+Bfpv	        B100
+Cgjkqsxz    	C200
+Algorithm    	A426
+Soundex        	S532
+
+  
+Scenario 4: Similar sounding words should have the same Soundex output
+Given:
+•	A pair of similar sounding words "<word1>" and "<word2>".
+When:
+•	The Soundex algorithm is applied to both words.
+Then:
+•	Both words should have the same Soundex output "<soundex_code>".
+  
+Examples:
+word1	      word2	      soundex_code
+Robert    	Rupert           R163
+Rubin	      Rabin      		   R150
+Ashcraft  	Ashcroft   	     A261
+Jackson    	Jaxen      	     J250
+
+  
+Scenario 5: Empty input should return empty output
+Given:
+•	An empty string as input.
+When:
+•	The Soundex algorithm is applied to the empty string.
+Then:
+•	The result is an empty string.
+
+Examples:
+input  	soundex_code
+ ""	     ""
+
+  
+Scenario 6: Padding with zeros if input is less than four characters
+Given:
+•	A word "<short_word>" with less than four characters.
+When:
+•	The Soundex algorithm is applied to the word.
+Then:
+•	The result is "<padded_soundex_code>".
+  
+Examples:
+short_word  	padded_soundex_code
+A	            A000
+AB            A100
+ABC	            A120
+D	            D000
